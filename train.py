@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Jun 17 2018
-
-@author: Ashish Kumar
-"""
 
 import tkinter as tk
 from tkinter import Message ,Text
@@ -15,6 +10,7 @@ from PIL import Image, ImageTk
 import pandas as pd
 import datetime
 import time
+
 import tkinter.ttk as ttk
 import tkinter.font as font
 
@@ -25,11 +21,11 @@ window.title("Face_Recogniser")
 dialog_title = 'QUIT'
 dialog_text = 'Are you sure?'
 #answer = messagebox.askquestion(dialog_title, dialog_text)
- 
+window.geometry("1366x768")
 #window.geometry('1280x720')
-window.configure(background='blue')
+window.configure(background='gray')
 
-#window.attributes('-fullscreen', True)
+window.attributes('-fullscreen', True)
 
 window.grid_rowconfigure(0, weight=1)
 window.grid_columnconfigure(0, weight=1)
@@ -42,8 +38,15 @@ window.grid_columnconfigure(0, weight=1)
 #The Label widget is a standard Tkinter widget used to display a text or image on the screen.
 #panel = tk.Label(window, image = img)
 
-
 #panel.pack(side = "left", fill = "y", expand = "no")
+path = "profile.jpg"  # Path to profile image
+img = ImageTk.PhotoImage(Image.open(path))
+panel = tk.Label(window, image=img)
+panel.pack(side="left", fill="y", expand="no")
+
+
+
+
 
 #cv_img = cv2.imread("img541.jpg")
 #x, y, no_channels = cv_img.shape
@@ -63,29 +66,29 @@ message = tk.Label(window, text="Face-Recognition-Based-Attendance-Management-Sy
 
 message.place(x=200, y=20)
 
-lbl = tk.Label(window, text="Enter ID",width=20  ,height=2  ,fg="red"  ,bg="yellow" ,font=('times', 15, ' bold ') ) 
+lbl = tk.Label(window, text="Enter ID",width=20  ,height=2  ,fg="#333"  ,bg="#f5f5f5" ,font=('times', 15, ' bold ') ) 
 lbl.place(x=400, y=200)
 
-txt = tk.Entry(window,width=20  ,bg="yellow" ,fg="red",font=('times', 15, ' bold '))
+txt = tk.Entry(window,width=20  ,bg="#f5f5f5" ,fg="#333",font=('times', 15, ' bold '))
 txt.place(x=700, y=215)
 
-lbl2 = tk.Label(window, text="Enter Name",width=20  ,fg="red"  ,bg="yellow"    ,height=2 ,font=('times', 15, ' bold ')) 
+lbl2 = tk.Label(window, text="Enter Name",width=20  ,fg="#333"  ,bg="#f5f5f5"    ,height=2 ,font=('times', 15, ' bold ')) 
 lbl2.place(x=400, y=300)
 
-txt2 = tk.Entry(window,width=20  ,bg="yellow"  ,fg="red",font=('times', 15, ' bold ')  )
+txt2 = tk.Entry(window,width=20  ,bg="#f5f5f5"  ,fg="#333",font=('times', 15, ' bold ')  )
 txt2.place(x=700, y=315)
 
-lbl3 = tk.Label(window, text="Notification : ",width=20  ,fg="red"  ,bg="yellow"  ,height=2 ,font=('times', 15, ' bold underline ')) 
+lbl3 = tk.Label(window, text="Notification : ",width=20  ,fg="#333"  ,bg="#f5f5f5"  ,height=2 ,font=('times', 15, ' bold underline ')) 
 lbl3.place(x=400, y=400)
 
-message = tk.Label(window, text="" ,bg="yellow"  ,fg="red"  ,width=30  ,height=2, activebackground = "yellow" ,font=('times', 15, ' bold ')) 
+message = tk.Label(window, text="" ,bg="#f5f5f5"  ,fg="#333"  ,width=30  ,height=2, activebackground = "#f5f5f5" ,font=('times', 15, ' bold ')) 
 message.place(x=700, y=400)
 
-lbl3 = tk.Label(window, text="Attendance : ",width=20  ,fg="red"  ,bg="yellow"  ,height=2 ,font=('times', 15, ' bold  underline')) 
+lbl3 = tk.Label(window, text="Attendance : ",width=20  ,fg="#333"  ,bg="#f5f5f5"  ,height=2 ,font=('times', 15, ' bold  underline')) 
 lbl3.place(x=400, y=650)
 
 
-message2 = tk.Label(window, text="" ,fg="red"   ,bg="yellow",activeforeground = "green",width=30  ,height=2  ,font=('times', 15, ' bold ')) 
+message2 = tk.Label(window, text="" ,fg="#333"   ,bg="#f5f5f5",activeforeground = "green",width=30  ,height=4  ,font=('times', 15, ' bold ')) 
 message2.place(x=700, y=650)
  
 def clear():
@@ -158,7 +161,7 @@ def TakeImages():
             message.configure(text= res)
     
 def TrainImages():
-    recognizer = cv2.face_LBPHFaceRecognizer.create()#recognizer = cv2.face.LBPHFaceRecognizer_create()#$cv2.createLBPHFaceRecognizer()
+    recognizer = cv2.face.LBPHFaceRecognizer_create()#recognizer = cv2.face.LBPHFaceRecognizer_create()#$cv2.createLBPHFaceRecognizer()
     harcascadePath = "haarcascade_frontalface_default.xml"
     detector =cv2.CascadeClassifier(harcascadePath)
     faces,Id = getImagesAndLabels("TrainingImage")
@@ -189,11 +192,10 @@ def getImagesAndLabels(path):
         Ids.append(Id)        
     return faces,Ids
 
-"""
 def TrackImages():
-    recognizer = cv2.face.LBPHFaceRecognizer_create() #cv2.createLBPHFaceRecognizer()
+    recognizer = cv2.face.LBPHFaceRecognizer_create()#cv2.createLBPHFaceRecognizer()
     recognizer.read("TrainingImageLabel/Trainner.yml")
-    harcascadePath = "C:/Users/WELCOME/Downloads/Face-Recognition-Based-Attendance-System-master/Face-Recognition-Based-Attendance-System-master/haarcascade_frontalface_default.xml"
+    harcascadePath = "C:/Users/WELCOME/Desktop/Face-Recognition-Based-Attendance-System/Orginal code/haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(harcascadePath);    
     df=pd.read_csv("StudentDetails/StudentDetails.csv")
     cam = cv2.VideoCapture(0)
@@ -236,83 +238,25 @@ def TrackImages():
     cv2.destroyAllWindows()
     #print(attendance)
     res=attendance
-    message2.configure(text= res)"""
-    
-def TrackImages():
-    recognizer = cv2.face.LBPHFaceRecognizer_create()  # Face recognizer
-    recognizer.read("TrainingImageLabel/Trainner.yml")
-    harcascadePath = "haarcascade_frontalface_default.xml"
-    faceCascade = cv2.CascadeClassifier(harcascadePath)
-
-    df = pd.read_csv("StudentDetails/StudentDetails.csv")
-    cam = cv2.VideoCapture(0)
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    col_names = ['Id', 'Name', 'Date', 'Time']
-    attendance = pd.DataFrame(columns=col_names)
-
-    while True:
-        ret, im = cam.read()
-        gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
-        faces = faceCascade.detectMultiScale(gray, 1.2, 5)
-
-        for (x, y, w, h) in faces:
-            cv2.rectangle(im, (x, y), (x + w, y + h), (225, 0, 0), 2)
-            Id, conf = recognizer.predict(gray[y:y + h, x:x + w])
-
-            if conf < 50:  # Valid face with high confidence
-                ts = time.time()
-                date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
-                timeStamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
-                aa = df.loc[df['Id'] == Id]['Name'].values
-
-                if len(aa) > 0 and Id not in attendance['Id'].values:  # Add only new valid entries
-                    name = str(aa[0])
-                    attendance.loc[len(attendance)] = [Id, name, date, timeStamp]
-                    print(f"Attendance marked for: {name}")
-                tt = str(Id) + "-" + str(aa[0])
-            else:
-                tt = "Unknown"
-
-            cv2.putText(im, str(tt), (x, y + h), font, 1, (255, 255, 255), 2)
-
-        cv2.imshow('im', im)
-
-        if cv2.waitKey(1) == ord('q'):
-            break
-
-    # Save attendance to a single sheet
-    final_file = "Attendance/FinalAttendance.csv"
-    if os.path.exists(final_file):
-        existing_attendance = pd.read_csv(final_file)
-        attendance = pd.concat([existing_attendance, attendance]).drop_duplicates(subset=['Id'], keep='first')
-
-    attendance.to_csv(final_file, index=False)
-
-    cam.release()
-    cv2.destroyAllWindows()
-    print("Attendance Updated")
-    res = attendance
-    message2.configure(text=res)
-
-
+    message2.configure(text= res)
 
   
-clearButton = tk.Button(window, text="Clear", command=clear  ,fg="red"  ,bg="yellow"  ,width=20  ,height=2 ,activebackground = "Red" ,font=('times', 15, ' bold '))
+clearButton = tk.Button(window, text="Clear", command=clear  ,fg="#333"  ,bg="#f5f5f5"  ,width=20  ,height=2 ,activebackground = "#333" ,font=('times', 15, ' bold '))
 clearButton.place(x=950, y=200)
-clearButton2 = tk.Button(window, text="Clear", command=clear2  ,fg="red"  ,bg="yellow"  ,width=20  ,height=2, activebackground = "Red" ,font=('times', 15, ' bold '))
+clearButton2 = tk.Button(window, text="Clear", command=clear2  ,fg="#333"  ,bg="#f5f5f5"  ,width=20  ,height=2, activebackground = "#333" ,font=('times', 15, ' bold '))
 clearButton2.place(x=950, y=300)    
-takeImg = tk.Button(window, text="Take Images", command=TakeImages  ,fg="red"  ,bg="yellow"  ,width=20  ,height=3, activebackground = "Red" ,font=('times', 15, ' bold '))
+takeImg = tk.Button(window, text="Take Images", command=TakeImages  ,fg="#333"  ,bg="#f5f5f5"  ,width=20  ,height=3, activebackground = "#333" ,font=('times', 15, ' bold '))
 takeImg.place(x=200, y=500)
-trainImg = tk.Button(window, text="Train Images", command=TrainImages  ,fg="red"  ,bg="yellow"  ,width=20  ,height=3, activebackground = "Red" ,font=('times', 15, ' bold '))
+trainImg = tk.Button(window, text="Train Images", command=TrainImages  ,fg="#333"  ,bg="#f5f5f5"  ,width=20  ,height=3, activebackground = "#333" ,font=('times', 15, ' bold '))
 trainImg.place(x=500, y=500)
-trackImg = tk.Button(window, text="Track Images", command=TrackImages  ,fg="red"  ,bg="yellow"  ,width=20  ,height=3, activebackground = "Red" ,font=('times', 15, ' bold '))
+trackImg = tk.Button(window, text="Track Images", command=TrackImages  ,fg="#333"  ,bg="#f5f5f5"  ,width=20  ,height=3, activebackground = "#333" ,font=('times', 15, ' bold '))
 trackImg.place(x=800, y=500)
-quitWindow = tk.Button(window, text="Quit", command=window.destroy  ,fg="red"  ,bg="yellow"  ,width=20  ,height=3, activebackground = "Red" ,font=('times', 15, ' bold '))
+quitWindow = tk.Button(window, text="Quit", command=window.destroy  ,fg="#333"  ,bg="#f5f5f5"  ,width=20  ,height=3, activebackground = "#333" ,font=('times', 15, ' bold '))
 quitWindow.place(x=1100, y=500)
 copyWrite = tk.Text(window, background=window.cget("background"), borderwidth=0,font=('times', 30, 'italic bold underline'))
 copyWrite.tag_configure("superscript", offset=10)
-#copyWrite.insert("insert", "Developed by Ashish","", "TEAM", "superscript")
-copyWrite.configure(state="disabled",fg="red"  )
+#copyWrite.insert("insert", "Developed by sai","", "TEAM", "superscript")
+copyWrite.configure(state="disabled",fg="#333"  )
 copyWrite.pack(side="left")
 copyWrite.place(x=800, y=750)
  
